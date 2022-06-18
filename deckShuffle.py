@@ -2,7 +2,7 @@ import math
 import random
 from IOHandler import *
 
-card_dict = {'1': 1, '2': 2, '3': 4, '4': 4, '5': 3, '6': 4}
+card_dict = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 4, '6': 4}
 
 '''
 Step 1: To start you take your stack of 18 CARDS, this is called the DECK
