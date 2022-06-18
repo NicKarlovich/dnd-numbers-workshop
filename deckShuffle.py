@@ -2,8 +2,6 @@ import math
 import random
 from IOHandler import *
 
-card_dict = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 4, '6': 4}
-
 '''
 Step 1: To start you take your stack of 18 CARDS, this is called the DECK
 Step 2: Shuffle your DECK
@@ -125,7 +123,7 @@ def card_swap_logic(build, do_min_max_swap=True):
             player_array.append(score[0] + score[1] + score[2])
     return player_array
 
-def create_deck_shuffle_stats(num_iter, filename):
+def create_deck_shuffle_stats(num_iter, filename, card_dict):
     to_write = []
     for i in range(0, num_iter):
         deck = create_deck(card_dict)

@@ -17,8 +17,8 @@ per_score_X_axis = np.arange(len(per_score_str_label))
 per_bulid_labels = ["S1", "S2", "S3", "S4", "S5", "S6"]
 per_build_X_axis = np.arange(len(per_bulid_labels))
 
-files = ["data/deckShuffleData.csv", "data/dropLow4d6Data.csv"]
-filelabels = ["Deck Shuffle", "4d6 Drop Lowest"]
+files = ["data/deckShuffleDataA.csv","data/deckShuffleDataB.csv","data/deckShuffleDataC.csv","data/deckShuffleDataD.csv", "data/dropLow4d6Data.csv"]
+filelabels = ["Deck Shuffle A", "Deck Shuffle B", "Deck Shuffle C", "Deck Shuffle D", "4d6 Drop Lowest"]
 score_data = []
 raw_flat_data = []
 for dataset in files:
@@ -34,6 +34,10 @@ x_offset = bar_width / 2
 label_offsets = list(map(lambda x: (x * bar_width) + x_offset - (TOTAL_BAR_WIDTH / 2), np.arange(num_files)))
 print(label_offsets)
 
+def add_labels(x, y, label_offset):
+    for i in range(len(x)):
+        plt.text(i + label_offset, y[i], round(y[i], 4), fontsize=6, ha = 'center', rotation=45)
+
 def sixStackVis():
     num_files = len(files)
     for i in range(0, num_files):
@@ -45,6 +49,7 @@ def sixStackVis():
                 totals[j] = totals[j] + build[j]
         avg_total = list(map(lambda x : x / len(dataset), totals))
         plt.bar(per_build_X_axis + label_offsets[i], avg_total, TOTAL_BAR_WIDTH / num_files, label = filelabels[i])
+        add_labels(per_bulid_labels, avg_total, label_offsets[i])
 
     plt.xticks(per_build_X_axis, per_bulid_labels)
     plt.xlabel("Build, sorted low to high")
@@ -61,7 +66,9 @@ def overallRawVis():
             totals[score - 3] = totals[score - 3] + 1
         percent_total = list(map(lambda x: x/len(raw_flat_data[i]), totals))
         plt.bar(per_score_X_axis + label_offsets[i], percent_total, TOTAL_BAR_WIDTH / num_files, label = filelabels[i])
+        add_labels(per_score_labels, percent_total, label_offsets[i])
 
+    
     plt.xticks(per_score_X_axis, per_score_str_label)
     plt.xlabel("Ability Score")
     plt.ylabel("Odds of getting a given value for a single stat")
@@ -69,5 +76,5 @@ def overallRawVis():
     plt.legend()
     plt.show()
 
-#overallRawVis()
+overallRawVis()
 #sixStackVis()
