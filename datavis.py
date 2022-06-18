@@ -63,7 +63,7 @@ def overallRawVis():
 
     # Make Bar Graph
 
-    plt.xticks(X_axis, str_label)
+    plt.xticks(rawX_axis, str_label)
     plt.xlabel("Ability Score")
     plt.ylabel("Odds of getting for a given stat")
     plt.title("Comparing Ability Score Generation Techniques")
